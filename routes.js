@@ -22,8 +22,8 @@ function isValidProfile(req, res, next) {
       lastName: Joi.string(),
       dateOfBirth: Joi.date().min('1-1-1920').max('1-1-2000'),
       gender: Joi.string(),
-    });
-    Joi.assert(req.body.profile, profileSchema);
+    }).required();
+    Joi.assert(req.body, profileSchema);
   } catch (error) {
     return res.sendStatus(400);
   }
