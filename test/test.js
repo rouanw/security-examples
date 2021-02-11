@@ -31,10 +31,8 @@ describe('profiles', () => {
     assert.strictEqual(body.firstName, 'Ada');
   });
   it('only lets you get a profile if you are logged in', async () => {
-    const { body } = await request(app)
+    await request(app)
       .get('/profile/ada')
-      .set('Cookie', ['user=anyone'])
-      .expect(200);
-    assert.strictEqual(body.firstName, 'Ada');
+      .expect(401);
   });
 });
