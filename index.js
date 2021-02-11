@@ -1,13 +1,12 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use((req, res, next) => {
-  res.locals.user = {
-    username: 'ada',
-  };
   next();
 });
 

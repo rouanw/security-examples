@@ -2,14 +2,14 @@ const Joi = require('joi');
 const { getProfile, createProfile } = require('./profile');
 
 function isLoggedIn(req, res, next) {
-  if (res.locals.user) {
+  if (req.cookies.user) {
     return next();
   }
   return res.sendStatus(401);
 }
 
 function userMatchesRequest(req, res, next) {
-  if (req.params.username === res.locals.user?.username) {
+  if (req.params.username === req.cookies.user) {
     return next();
   }
   return res.sendStatus(403);
