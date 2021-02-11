@@ -7,21 +7,21 @@ describe('profiles', () => {
     await request(app)
       .post('/profile/ada')
       .set('Cookie', ['user=ada'])
-      .expect(201)
-      .send({ firstName: 'ada' });
+      .send({ firstName: 'ada' })
+      .expect(201);
   });
   it('only creates a profile if you are logged in', async () => {
     await request(app)
       .post('/profile/ada')
-      .expect(401)
-      .send({ firstName: 'ada' });
+      .send({ firstName: 'ada' })
+      .expect(401);
   });
   it('does not create an invalid profile', async () => {
     await request(app)
       .post('/profile/ada')
       .set('Cookie', ['user=ada'])
-      .expect(400)
-      .send({ lastName: 'where is my first name?' });
+      .send({ lastName: 'where is my first name?' })
+      .expect(400);
   });
   it('gets a profile', async () => {
     const { body } = await request(app)
