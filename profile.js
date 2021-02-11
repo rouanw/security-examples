@@ -6,8 +6,7 @@ module.exports = {
     const profile = await database.getProfileByUsername(username);
     res.json(profile);
   },
-  async createProfile({ body }, res) {
-    const { profile } = body;
+  async createProfile({ body: profile }, res) {
     await database.create(profile);
     res.sendStatus(201);
   },
