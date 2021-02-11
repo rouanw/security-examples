@@ -1,19 +1,6 @@
 const Joi = require('joi');
+const { isLoggedIn, userMatchesRequest } = require('./middleware');
 const { getProfile, createProfile } = require('./profile');
-
-function isLoggedIn(req, res, next) {
-  if (req.cookies.user) {
-    return next();
-  }
-  return res.sendStatus(401);
-}
-
-function userMatchesRequest(req, res, next) {
-  if (req.params.username === req.cookies.user) {
-    return next();
-  }
-  return res.sendStatus(403);
-}
 
 function isValidProfile(req, res, next) {
   try {
