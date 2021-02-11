@@ -5,7 +5,7 @@ module.exports = {
   create() {
     return new Promise((resolve) => resolve());
   },
-  update(username) {
-    return new Promise((resolve) => resolve({ firstName: 'Ada', lastName: 'Lovelace' }));
+  update(username, profile) {
+    return new Promise((resolve) => resolve(profile));
   },
 };
