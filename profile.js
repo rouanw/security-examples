@@ -10,4 +10,9 @@ module.exports = {
     await database.create(profile);
     res.sendStatus(201);
   },
+  async updateProfile({ params, body: profile }, res) {
+    const { username } = params;
+    const updated = await database.update(username, profile);
+    res.json(updated);
+  },
 };

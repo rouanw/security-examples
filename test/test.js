@@ -35,4 +35,31 @@ describe('profiles', () => {
       .get('/profile/ada')
       .expect(401);
   });
+  it('only lets you update your profile if you are logged in', async () => {
+    await request(app)
+      .put('/profile/ada')
+      .expect(401);
+  });
+  it('updates a profile with extra information', async () => {
+    const { body } = await request(app)
+      .put('/profile/ada')
+      .set('Cookie', ['user=ada'])
+      .send({
+        firstName: 'Ada',
+        lastName: 'Lovelace',
+        gender: 'Female',
+        sexualOrientation: 'Heterosexual',
+        idealDate: 'Going to the movies',
+        favoriteColor: 'Green',
+        favoriteFood: 'Pizza',
+      })
+      .expect(200);
+    assert.strictEqual(body.firstName, 'Ada');
+    assert.strictEqual(body.lastName, 'Lovelace');
+    assert.strictEqual(body.gender, 'Female');
+    assert.strictEqual(body.sexualOrientation, 'Heterosexual');
+    assert.strictEqual(body.idealDate, 'Going to the movies');
+    assert.strictEqual(body.favoriteColor, 'Green');
+    assert.strictEqual(body.favoriteFood, 'Pizza');
+  });
 });
